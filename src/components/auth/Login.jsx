@@ -2,7 +2,9 @@ import  { useState } from 'react'
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 
-const Login = () => {
+const Login = ({handleLogin}) => {
+  // console.log(handleLogin);
+  
   const [showPassword, setShowPassword] = useState(true)
   const [rememberMe, setRememberMe] = useState(false)
   const [email, setEmail] = useState('');
@@ -15,6 +17,7 @@ const Login = () => {
     console.log("Login form submitted");
     // Example of how to access form data
     console.log(`Email: ${email}, Password: ${password}`);
+    handleLogin(email,password)
     setEmail("")
     setPassword("")
 
