@@ -8,22 +8,30 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthProvider";
 
 export default function App() {
-  const AuthData = useContext(AuthContext)
  
+  const AuthData = useContext(AuthContext);
+  
   
   const [User, setUser] = useState(null)
   useEffect(() => {
-    // setLocalStorage()
-    getLocalStorage()
-  },)
+  if(AuthData){
+    const loggedInUser = localStorage.getItem("loggedInUser")
+  if(loggedInUser) {
+   
+    setUser(loggedInUser.role);
+  }
+  }
+  },[AuthData])
   const handleLogin = (email,password) => {
     if(AuthData.admin.some(admin => admin.email === email && admin.password === password)) {
       setUser('admin');
+      localStorage.setItem("loggedInUser", JSON.stringify({ role: 'admin' }));
       console.log('Admin logged in');
     } 
    
     else if(AuthData.emp.some(employee => employee.email === email && employee.password === password)) {  
       setUser('User');
+      localStorage.setItem("loggedInUser", JSON.stringify({ role: 'emp' }));
       console.log(`User logged in`);
     }
     else {

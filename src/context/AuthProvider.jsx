@@ -8,6 +8,8 @@ useEffect(() => {
   const {emp,admin} = getLocalStorage()
   setUserData({emp,admin})
   
+  
+  
 }, [])
 
 
